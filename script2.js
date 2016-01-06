@@ -58,12 +58,11 @@
                 // if no leave blank
                 // if yes, draw content
 
-
         for (i = 0; i < rows; i++) {
             for (j = 0; j < cols; j++) {
                 var currentCell = board[i * rows + j];
-                x = j * width;
-                y = i * height;
+                var x = j * width;
+                var y = i * height;
 
                 if (currentCell.visible == true) {
                     context.font = "20px Arial";
@@ -168,30 +167,35 @@
                     board[i + 1].content += 1;
                 }
 
-                if (i > rows && i < rows * cols - 1 && board[i - rows].content != "*") {    // top, top-left, top-right
+                if (i > rows && i < rows * cols - 1 ) {    // top, top-left, top-right
 
-                    board[i - rows].content += 1;
+                    if (board[i - rows].content != "*") {
+                        board[i - rows].content += 1;
+                    }
 
-                    if (board[i - rows - 1].content != "*") {
+                    if (board[i - rows - 1].content != "*" && i % 10 != 0) {
 
                         board[i - rows - 1].content += 1;
                     }
-                    if (board[i - rows + 1].content != "*") {
+                    if (board[i - rows + 1].content != "*" && (i - 9) % 10 != 0) {
 
                         board[i - rows + 1].content += 1;
                     }
                 }
 
 
-                if (i < (rows * cols) - rows && board[i + rows].content != "*") {                   //bottom, bottom-right, bottom-left
+                if (i < (rows * cols) - rows) {                   //bottom, bottom-right, bottom-left
 
-                    board[i + rows].content += 1;
+                    if (board[i + rows].content != "*") {
 
-                    if (board[i + rows - 1].content != "*") {
+                        board[i + rows].content += 1;
+                    }
+
+                    if (board[i + rows - 1].content != "*" && i % 10 != 0) {
 
                         board[i + rows - 1].content += 1;
                     }
-                    if (board[i + rows + 1].content != "*") {
+                    if (board[i + rows + 1].content != "*" && (i - 9) % 10 != 0) {
 
                         board[i + rows + 1].content += 1;
                     }
